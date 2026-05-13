@@ -22,4 +22,4 @@ USER appuser
 EXPOSE 8000
 
 ENTRYPOINT ["/app/docker/entrypoint.sh"]
-CMD ["gunicorn", "app.main:create_app", "--factory", "-k", "uvicorn.workers.UvicornWorker", "-w", "2", "-b", "0.0.0.0:8000", "--graceful-timeout", "30", "--timeout", "60"]
+CMD ["gunicorn", "app.main:app", "-k", "uvicorn.workers.UvicornWorker", "-w", "2", "-b", "0.0.0.0:8000", "--graceful-timeout", "30", "--timeout", "60"]

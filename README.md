@@ -59,11 +59,12 @@ docker compose up --build
 Рекомендуемая команда уже задана в `Dockerfile`:
 
 ```bash
-gunicorn app.main:create_app --factory -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:8000
+gunicorn app.main:app -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:8000
 ```
 
 Для production задайте `ENVIRONMENT=production`, надежный `API_KEY`,
 реальный `YANDEX_GEOCODER_API_KEY` и не включайте `DEBUG`.
+
 
 ## Тесты
 
@@ -72,6 +73,34 @@ gunicorn app.main:create_app --factory -k uvicorn.workers.UvicornWorker -w 2 -b 
 ```
 
 Contract-тест сравнивает текущую OpenAPI-схему со snapshot в `tests/contract/openapi_snapshot.json`.
+
+## Ruff
+
+Ruff используется как formatter и linter.
+
+Проверить форматирование:
+
+```bash
+./venv/bin/ruff format --check app tests
+```
+
+Отформатировать код:
+
+```bash
+./venv/bin/ruff format app tests
+```
+
+Запустить lint:
+
+```bash
+./venv/bin/ruff check app tests
+```
+
+Автоисправить поддерживаемые замечания:
+
+```bash
+./venv/bin/ruff check app tests --fix
+```
 
 ## Миграции
 
